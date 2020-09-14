@@ -1,5 +1,6 @@
-﻿using AspNetCoreVideo.Models;
+﻿using AspNetCoreVideo.Entities;
 using AspNetCoreVideo.Services;
+using AspNetCoreVideo.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,47 @@ namespace AspNetCoreVideo.Controllers
         }
         public ViewResult Index()
         {
-            var model = _videos.GetAll();
+            var model = _videos.GetAll().Select(video => new VideoViewModel
+            { 
+                Id = video.Id,
+                Title = video.Title,
+                Genre = video.Genre.ToString()
+            });
             return View(model);
+        }
+        public IActionResult Details(int id)
+        {
+            var model = _videos.Get(id);
+            if (model == null)
+                return RedirectToAction("Index");
+            return View(new VideoViewModel
+            {
+                Id = model.Id,
+                Title = model.Title,
+                Genre = model.Genre.ToString()
+            });
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(VideoEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var video = new Video
+                {
+                    Title = model.Title,
+                    Genre = model.Genre
+                };
+
+                _videos.Add(video);
+                return RedirectToAction("Details", new { id = video.Id });
+            }
+
+            return View();
         }
     }
 }
