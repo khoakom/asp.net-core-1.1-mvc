@@ -30,6 +30,7 @@ namespace AspNetCoreVideo
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             //services.AddSingleton<IMessageService, HardcodedMessageService>();
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IMessageService, ConfigurationMessageService>();
@@ -44,6 +45,9 @@ namespace AspNetCoreVideo
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMvcWithDefaultRoute();
+            app.UseFileServer();
 
             app.Run(async (context) =>
             {
