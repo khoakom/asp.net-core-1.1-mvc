@@ -1,0 +1,22 @@
+{
+    "version": "1.0",
+    "defaultProvider": "cdnjs",
+    "libraries": [
+        {
+            "library": "twitter-bootstrap@3.3.7",
+            "destination": "wwwroot/lib/bootstrap"
+        },
+        {
+            "library": "jquery-validate@1.16.0",
+            "destination": "wwwroot/lib/jquery-validation"
+        },
+        {
+            "library": "jquery-validation-unobtrusive@3.2.6",
+            "destination": "wwwroot/lib/jquery-validation-unobtrusive"
+        },
+        {
+            "library": "jquery@3.5.1",
+            "destination": "wwwroot/lib/jquery"
+        }
+    ]
+}
