@@ -11,11 +11,11 @@ namespace AspNetCoreVideo.Entities
     {
         public int Id { get; set; }
 
-        [DataType(DataType.Password)]
         [Required, MinLength(3), MaxLength(80)]
         public string Title { get; set; }
 
         [Display(Name = "Film Genre")]
         public Genres Genre { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

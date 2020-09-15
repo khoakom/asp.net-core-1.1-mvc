@@ -1,20 +1,29 @@
-﻿@model IEnumerable<AspNetCoreVideo.ViewModels.VideoViewModel>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Video</title>
-</head>
-<body>
-    <table>
-        @foreach (var video in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(video.Id.ToString(), "Details", new { id = video.Id })</td>
-                <td>@video.Title</td>
-                <td>@video.Genre</td>
-            </tr>
+﻿@model IEnumerable<VideoViewModel>
 
-        }
-    </table>
+@{
+    ViewBag.Title = "Home";
+}
 
-</body>
-</html>
+<table>
+    @foreach (var video in Model)
+    {
+        <tr>
+            <td>@video.Id</td>
+            <td>@video.Title</td>
+            <td>@video.Genre</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@video.Id">Details</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@video.Id">Edit</a>
+            </td>
+        </tr>
+
+    }
+</table>
+
+<a asp-action="Create">Create</a>
+
+@section footer{
+    <div>This is the Index footer</div>
+}
