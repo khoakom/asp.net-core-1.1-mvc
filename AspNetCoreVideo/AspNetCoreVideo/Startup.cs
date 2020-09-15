@@ -4,10 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreVideo.Data;
+using AspNetCoreVideo.Entities;
 using AspNetCoreVideo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -45,6 +47,8 @@ namespace AspNetCoreVideo
             services.AddSingleton<IMessageService, ConfigurationMessageService>();
             //services.AddSingleton<IVideoData, MockVideoData>();
             services.AddSingleton<IVideoData, SqlVideoData>();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<VideoDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +60,7 @@ namespace AspNetCoreVideo
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseIdentity();
             //app.UseMvc(ConfigureRoutes);
             app.UseMvc(routes =>
             {

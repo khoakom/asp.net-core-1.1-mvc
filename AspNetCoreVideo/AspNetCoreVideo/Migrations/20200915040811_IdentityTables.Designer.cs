@@ -9,9 +9,10 @@ using AspNetCoreVideo.Models;
 namespace AspNetCoreVideo.Migrations
 {
     [DbContext(typeof(VideoDbContext))]
-    partial class VideoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200915040811_IdentityTables")]
+    partial class IdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
